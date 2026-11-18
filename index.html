@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17483e">
+  <meta name="description" content="一份为你慢慢挑好的私人片单。聪明的故事，有趣的对白，还有中国历史与文物。">
+  <title>今晚看点什么 · 给你的私人片单</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data/catalog.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#library">跳到片单</a>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="今晚看点什么，回到发现片单">
+      <span class="brand-symbol" aria-hidden="true">晚</span>
+      <span class="brand-name">今晚看点什么<small>A LITTLE CINEMA, JUST FOR YOU</small></span>
+    </a>
+    <nav aria-label="我的片单">
+      <button class="nav-button active" data-view="discover" aria-pressed="true">发现片单</button>
+      <button class="nav-button" data-view="wish" aria-pressed="false">我的想看 <span id="wish-count">0</span></button>
+      <button class="nav-button" data-view="seen" aria-pressed="false">已看过</button>
+      <button class="icon-button" id="settings-button" aria-label="片单设置与备份" title="片单设置与备份"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 17h16M8 4v6m8 4v6"/></svg></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> 给你慢慢挑好的私人片单</p>
+        <h1 id="hero-title">今晚，<br>看点<span class="title-emphasis">什么？<svg viewBox="0 0 260 16" aria-hidden="true"><path d="M3 11C78 2 171 1 255 7"/></svg></span></h1>
+        <p class="hero-description">有趣的对白，聪明的故事。<br>把挑片的时间，留给好看的那一部。</p>
+        <div class="hero-actions"><a class="primary-button" href="#library">找一部想看的 <span aria-hidden="true">↗</span></a><button class="text-button" id="surprise-button">帮我挑一部 <span aria-hidden="true">✧</span></button></div>
+        <div class="hero-note"><span class="little-star" aria-hidden="true">✦</span><span><strong id="catalog-count">—</strong> 部候选 · 按你的口味排序 · 随时慢慢选</span></div>
+      </div>
+      <div class="hero-visual" id="hero-posters" aria-label="精选作品"></div>
+      <div class="hero-bottom"><span>好故事，不必急着看完。</span><span>YOUR NEXT GOOD EVENING <span aria-hidden="true">↓</span></span></div>
+    </section>
+
+    <section id="library" class="library" aria-labelledby="library-title">
+      <div class="section-heading"><div><p class="eyebrow">THE WATCHLIST</p><h2 id="library-title">先从喜欢的开始</h2></div><p id="library-intro">熟悉的口味里，也藏一点新鲜感。</p></div>
+      <div class="mood-bar" role="group" aria-label="按观看心情筛选">
+        <button class="mood-chip selected" data-mood="all" aria-pressed="true">全部心情</button>
+        <button class="mood-chip" data-mood="想笑一笑" aria-pressed="false"><span aria-hidden="true">☺</span> 想笑一笑</button>
+        <button class="mood-chip" data-mood="想动脑" aria-pressed="false"><span aria-hidden="true">⌘</span> 想动脑</button>
+        <button class="mood-chip" data-mood="想磕CP" aria-pressed="false"><span aria-hidden="true">♡</span> 想磕 CP</button>
+        <button class="mood-chip" data-mood="看点文化" aria-pressed="false"><span aria-hidden="true">▱</span> 看点文化</button>
+        <button class="mood-chip" data-mood="换个口味" aria-pressed="false"><span aria-hidden="true">✧</span> 换个口味</button>
+      </div>
+      <div class="filter-panel">
+        <div class="category-tabs" role="group" aria-label="按地区或形式筛选">
+          <button class="category-tab selected" data-category="all" aria-pressed="true">全部</button><button class="category-tab" data-category="英国" aria-pressed="false">英剧</button><button class="category-tab" data-category="美国" aria-pressed="false">美剧</button><button class="category-tab" data-category="日本" aria-pressed="false">日剧</button><button class="category-tab" data-category="韩国" aria-pressed="false">韩剧</button><button class="category-tab" data-category="电影" aria-pressed="false">电影</button><button class="category-tab" data-category="纪录片" aria-pressed="false">纪录片</button>
+        </div>
+        <div class="filter-controls">
+          <label class="search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span class="sr-only">搜索片名、演员或类型</span><input type="search" id="search" placeholder="搜片名、演员或类型" autocomplete="off"><button id="clear-search" class="search-clear" aria-label="清空搜索" hidden>×</button></label>
+          <label class="select-label"><span class="sr-only">类型</span><select id="genre-filter"><option value="all">所有类型</option><option>推理</option><option>律政</option><option>喜剧</option><option>爱情</option><option>智斗</option><option>历史文化</option><option>冒险</option><option>科幻</option><option>动画</option></select></label>
+          <label class="select-label"><span class="sr-only">年代</span><select id="era-filter"><option value="all">所有年代</option><option value="2000">2000 年以后</option><option value="1990">1990 年以后</option><option value="classic">经典老片</option></select></label>
+          <label class="select-label sort-select"><span class="sr-only">排序</span><select id="sort"><option value="recommended">为你推荐</option><option value="newest">新一点的优先</option><option value="oldest">按年代从早到晚</option><option value="title">按片名排列</option></select></label>
+        </div>
+      </div>
+      <div class="results-line"><p id="results-count" role="status" aria-live="polite"></p><button id="reset-filters" class="text-button" hidden>清除筛选 <span aria-hidden="true">×</span></button><span id="results-note">已看过的作品收在「已看过」里</span></div>
+      <div id="film-grid" class="film-grid"></div>
+      <div id="empty-state" class="empty-state" hidden><span class="empty-symbol" aria-hidden="true">▱</span><h3 id="empty-title">暂时没有找到这一类</h3><p id="empty-message">换个条件，好故事还在片单里。</p><button id="empty-action" class="primary-button">看看全部片单</button></div>
+      <div class="load-more-wrap"><button id="load-more" class="secondary-button" hidden>再看一些 <span aria-hidden="true">↓</span></button><p id="load-progress"></p></div>
+    </section>
+
+    <section class="closing-note"><span aria-hidden="true">✦</span><div><h2>喜欢，就留给下一个晚上。</h2><p>点一下书签，放进「我的想看」。看完再慢慢划掉。</p></div><button class="text-button" data-go-wish>去我的想看 <span aria-hidden="true">↗</span></button></section>
+  </main>
+  <footer><div class="footer-brand">今晚看点什么 <span>一份慢慢生长的片单</span></div><p>记录保存在当前浏览器，可在设置中导出备份。<br>资料整理于 <span id="updated-date">2026.11.17</span> · 播放情况以平台页面为准</p><button class="text-button" id="back-top">回到顶部 ↑</button></footer>
+  <dialog id="detail-dialog" aria-labelledby="detail-title"><button class="dialog-close icon-button" data-close="detail-dialog" aria-label="关闭作品详情">×</button><div id="detail-content"></div></dialog>
+  <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title"><button class="dialog-close icon-button" data-close="settings-dialog" aria-label="关闭设置">×</button><p class="eyebrow">YOUR LITTLE SHELF</p><h2 id="settings-title">把片单留好</h2><p>想看、已看和暂不想看的记录保存在这台设备的当前浏览器中。换手机前，可以先导出一份。</p><div class="settings-actions"><button class="secondary-button" id="export-button">导出我的记录 ↗</button><label class="secondary-button file-label">导入已有记录<input type="file" id="import-file" accept="application/json,.json"></label><button class="secondary-button" id="hidden-button">查看暂不想看的作品</button></div><p class="settings-footnote">导入会合并记录；同一部作品使用导入文件中的状态。</p></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="noscript">请开启 JavaScript 以浏览和筛选片单。</p></noscript>
+</body>
+</html>
